@@ -659,13 +659,13 @@ elif _polyglot_is_pdksh || [ "$0" = 'dash' ] || _polyglot_is_busybox; then
       case $POLYGLOT_UNAME in
         NetBSD|OpenBSD) PS1="$PS1$(print "$POLYGLOT_NP")" ;;
       esac
-      PS1="$PS1${POLYGLOT_REV}"
     fi
+    ! _polyglot_is_dragonfly_console && PS1="$PS1${POLYGLOT_REV}"
     _polyglot_is_pdksh && ! _polyglot_is_dragonfly_console && PS1=$PS1$(print "$POLYGLOT_NP")
     PS1=$PS1'${LOGNAME:-$(logname)}$POLYGLOT_HOSTNAME_STRING'
-    if _polyglot_is_pdksh && ! _polyglot_is_dragonfly_console; then
-      PS1=$PS1$(print "$POLYGLOT_NP")${POLYGLOT_RESET}$(print "$POLYGLOT_NP")
-    fi
+    _polyglot_is_pdksh && ! _polyglot_is_dragonfly_console && PS1=$PS1$(print "$POLYGLOT_NP")
+    ! _polyglot_is_dragonfly_console && PS1="$PS1${POLYGLOT_RESET}"
+    _polyglot_is_pdksh && ! _polyglot_is_dragonfly_console && PS1=$PS1$(print "$POLYGLOT_NP")
     PS1=$PS1' $(_polyglot_prompt_dirtrim "$POLYGLOT_PROMPT_DIRTRIM")$(_polyglot_branch_status $POLYGLOT_KSH_BANG) # '
   fi
 
