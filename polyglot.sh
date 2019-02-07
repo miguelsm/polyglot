@@ -642,6 +642,7 @@ elif _polyglot_is_pdksh || [ "$0" = 'dash' ] || _polyglot_is_busybox; then
             *) return 1 ;;
           esac
           ;;
+        *) return 1 ;;
       esac
     }
 
