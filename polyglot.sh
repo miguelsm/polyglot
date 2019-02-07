@@ -631,7 +631,7 @@ elif _polyglot_is_pdksh || [ "$0" = 'dash' ] || _polyglot_is_busybox; then
     ##########################################################
     _polyglot_is_dragonfly_console() {
       case ${POLYGLOT_UNAME:=$(uname -s)} in
-        DragonFlyBSD)
+        DragonFly)
           case $(who am i) in
             *ttyv*) return 0 ;;
             *) return 1 ;;
