@@ -469,7 +469,8 @@ elif [ -n "$KSH_VERSION" ] || _polyglot_is_dtksh || [ -n "$ZSH_VERSION" ] \
       # See https://www.mirbsd.org/htman/i386/man1/mksh.htm
       if ! _polyglot_is_superuser; then
         if _polyglot_has_colors; then
-          PS1=$(print "\001\r\001\E[31;1m\001")
+          PS1=$'\n'
+          PS1+=$(print "\001\r\001\E[31;1m\001")
           PS1+='$(_polyglot_exit_status $?)'
           PS1+=$(print "\001\E[0m\E[32;1m\001")
           PS1+='${LOGNAME:-$(logname)}$POLYGLOT_HOSTNAME_STRING'
@@ -480,16 +481,19 @@ elif [ -n "$KSH_VERSION" ] || _polyglot_is_dtksh || [ -n "$ZSH_VERSION" ] \
           PS1+=$(print "\001\E[0m\E[33m\001")
           PS1+='$(_polyglot_branch_status $POLYGLOT_KSH_BANG)'
           PS1+=$(print "\001\E[0m\001")
-          PS1+=' λ '
+          PS1+=$'\nλ '
         else
-          PS1='$(_polyglot_exit_status $?)'
+          PS1=$'\n'
+          PS1+='$(_polyglot_exit_status $?)'
           PS1+='${LOGNAME:-$(logname)}$POLYGLOT_HOSTNAME_STRING '
           PS1+='$(_polyglot_ksh93_prompt_dirtrim "$POLYGLOT_PROMPT_DIRTRIM")'
-          PS1+='$(_polyglot_branch_status $POLYGLOT_KSH_BANG) \$ '
+          PS1+='$(_polyglot_branch_status $POLYGLOT_KSH_BANG)'
+          PS1+=$'\nλ '
         fi
       else # Superuser
         if _polyglot_has_colors; then
-          PS1=$(print "\001\r\001\E[31;1m\001")
+          PS1=$'\n'
+          PS1+=$(print "\001\r\001\E[31;1m\001")
           PS1+='$(_polyglot_exit_status $?)'
           PS1+=$(print "\001\E[0m\E[7m\001")
           PS1+='${LOGNAME:-$(logname)}$POLYGLOT_HOSTNAME_STRING'
@@ -500,16 +504,18 @@ elif [ -n "$KSH_VERSION" ] || _polyglot_is_dtksh || [ -n "$ZSH_VERSION" ] \
           PS1+=$(print "\001\E[0m\E[33m\001")
           PS1+='$(_polyglot_branch_status $POLYGLOT_KSH_BANG)'
           PS1+=$(print "\001\E[0m\001")
-          PS1+=' # '
+          PS1+=$'\n# '
         else
-          PS1=$(print "\001\r")
+          PS1=$'\n'
+          PS1+=$(print "\001\r")
           PS1+='$(_polyglot_exit_status $?)'
           PS1+=$(print "\001\E[7m\001")
           PS1+='${LOGNAME:-$(logname)}$POLYGLOT_HOSTNAME_STRING'
           PS1+=$(print "\001\E[0m\001")
           PS1+=' '
           PS1+='$(_polyglot_ksh93_prompt_dirtrim "$POLYGLOT_PROMPT_DIRTRIM")'
-          PS1+='$(_polyglot_branch_status $POLYGLOT_KSH_BANG) # '
+          PS1+='$(_polyglot_branch_status $POLYGLOT_KSH_BANG)'
+          PS1+=$'\n# '
         fi
       fi
       ;;
